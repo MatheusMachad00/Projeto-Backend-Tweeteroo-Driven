@@ -17,9 +17,11 @@ app.get("/", (_, res) => {
 });
 
 app.post("/sign-up", (req, res) => {
-    users.push(req.body);
-    userAvatar = req.body.avatar
-    res.status(200).send(console.log('Tudo ok!', users));
+    if(req.body.avatar !== "" && req.body.username !== ""){
+        users.push(req.body);
+        userAvatar = req.body.avatar;
+        res.status(201).send('Usuário cadastrado com sucesso!');
+    }else res.sendStatus(400);
 });
 
 app.post("/tweets", (req, res) => { 
@@ -31,8 +33,10 @@ app.post("/tweets", (req, res) => {
 		tweet: data.tweet
 	}
 
-    tweets.push(tweetData)
-    res.status(200).send(tweets);
+    if(req.body.username !== "" && req.body.tweet !== ""){
+        tweets.push(tweetData);
+        res.status(201).send(tweets);
+    }else res.sendStatus(400);
 });
 
 app.get("/tweets", (_, res) => {
