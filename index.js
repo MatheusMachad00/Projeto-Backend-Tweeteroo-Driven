@@ -42,7 +42,8 @@ app.post("/tweets", (req, res) => {
 app.get("/tweets", (_, res) => {
     const slicedTweets = tweets.slice(0, 10);
 
-    res.status(200).send(slicedTweets);
+    res.status(200).send(slicedTweets.reverse());
 });
+
 
 app.listen(5000); 
